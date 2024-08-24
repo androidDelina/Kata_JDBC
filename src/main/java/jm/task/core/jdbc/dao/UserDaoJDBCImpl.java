@@ -17,8 +17,8 @@ public class UserDaoJDBCImpl implements UserDao {
             "  `last_name` VARCHAR(45) NOT NULL,\n" +
             "  `age` INT NOT NULL,\n" +
             "  PRIMARY KEY (`id`),\n" +
-            "  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)"; //нужна ; или нет?
-    private static final String DROP_TABLE_QUERY = "DROP TABLE IF EXISTS `mydbtest`.`kata_users`";
+            "  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)";
+    private static final String DROP_TABLE_QUERY = "DROP TABLE IF EXISTS kata_users";
     private static final String SAVE_USER_QUERY = "INSERT INTO kata_users (name, last_name, age) VALUES (?, ?, ?)";
     private static final String REMOVE_USER_BY_ID_QUERY = "DELETE FROM kata_users WHERE 'id' = ?";
     private static final String GET_ALL_USERS_QUERY = "SELECT * FROM kata_users";
