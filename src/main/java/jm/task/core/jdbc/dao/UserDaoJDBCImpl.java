@@ -42,7 +42,7 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void saveUser(String name, String lastName, byte age) {
-        try (Connection connection = Util.getConnection();
+        try (Connection connection = Util.getConnectionJDBC();
              PreparedStatement preparedStatement = connection.prepareStatement(SAVE_USER_QUERY)) {
 
             Class.forName(DRIVER);
@@ -63,7 +63,7 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void removeUserById(long id) {
-        try (Connection connection = Util.getConnection();
+        try (Connection connection = Util.getConnectionJDBC();
              PreparedStatement preparedStatement = connection.prepareStatement(REMOVE_USER_BY_ID_QUERY)) {
 
             Class.forName(DRIVER);
@@ -80,8 +80,8 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
-        try (Connection connection = Util.getConnection();
-        Statement statement = connection.createStatement()) {
+        try (Connection connection = Util.getConnectionJDBC();
+             Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(GET_ALL_USERS_QUERY);
             while (resultSet.next()) {
                 long id = resultSet.getLong(ID_COLUMN_LABEL);
@@ -107,7 +107,7 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     private static void utilTableWork(String sql) {
-        try (Connection connection = Util.getConnection();
+        try (Connection connection = Util.getConnectionJDBC();
              Statement statement = connection.createStatement()) {
             Class.forName(DRIVER);
 
