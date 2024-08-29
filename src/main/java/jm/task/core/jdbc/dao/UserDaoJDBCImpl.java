@@ -20,7 +20,7 @@ public class UserDaoJDBCImpl implements UserDao {
             "  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)";
     private static final String DROP_TABLE_QUERY = "DROP TABLE IF EXISTS kata_users";
     private static final String SAVE_USER_QUERY = "INSERT INTO kata_users (name, last_name, age) VALUES (?, ?, ?)";
-    private static final String REMOVE_USER_BY_ID_QUERY = "DELETE FROM kata_users WHERE 'id' = ?";
+    private static final String REMOVE_USER_BY_ID_QUERY = "DELETE FROM kata_users WHERE id = ?";
     private static final String GET_ALL_USERS_QUERY = "SELECT * FROM kata_users";
     private static final String REMOVE_ALL_USERS_QUERY = "DELETE FROM kata_users";
 
@@ -67,8 +67,7 @@ public class UserDaoJDBCImpl implements UserDao {
              PreparedStatement preparedStatement = connection.prepareStatement(REMOVE_USER_BY_ID_QUERY)) {
 
             Class.forName(DRIVER);
-
-            preparedStatement.setString(1, String.valueOf(id));
+            preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
